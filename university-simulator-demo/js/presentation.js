@@ -102,10 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }).observe(document.getElementById('result-story-text'), { childList: true });
 
-  document.getElementById('dismiss-orientation-tip').addEventListener('click', () => {
-    document.getElementById('orientation-tip').hidden = true;
-  });
-
   // 弹窗保持原来的开关事件，只补充键盘焦点及背景隔离。
   const dialogs = [...document.querySelectorAll('.modal-overlay')];
   const background = [main, document.querySelector('.top-bar'), document.querySelector('.bottom-nav')];

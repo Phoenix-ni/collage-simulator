@@ -445,7 +445,6 @@ img { height: auto; }
 .project-desc-bullets { padding-left: 18px; color: #646f54; font-size: 11px; line-height: 1.95; }
 
 /* 08 / 指针、触屏反馈与动效 */
-.orientation-tip { display: none; }
 @media (hover: hover) {
   .nav-item:not(.active):hover { color: #f4f4dc; background: rgb(230 241 211 / 9%); }
   .btn-icon-menu:hover { background: #e9eddf; }
@@ -778,13 +777,6 @@ button:active, .action-card:not(.disabled):active, .rest-action-card:not(.disabl
   .res-val { font-size: 10px; }
   .res-icon { width: 15px; height: 15px; }
   .app-main { left: 0; bottom: calc(65px + env(safe-area-inset-bottom, 0px)); padding: 18px calc(var(--page-gap) + env(safe-area-inset-right, 0px)) 25px calc(var(--page-gap) + env(safe-area-inset-left, 0px)); overflow-y: auto; }
-  .orientation-tip { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; border: 1px solid #d8e1c8; border-radius: 9px; padding: 13px; color: #5d7244; background: #edf2e3; }
-  .orientation-tip > .ui-icon { width: 25px; height: 25px; }
-  .orientation-tip > div { flex: 1; }
-  .orientation-tip strong { display: block; font-size: 12px; font-weight: 600; }
-  .orientation-tip span { display: block; color: #636f50; font-size: 10px; margin-top: 2px; }
-  .orientation-tip button { display: grid; place-items: center; width: 34px; height: 34px; background: transparent; color: #60704b; }
-  .orientation-tip button .ui-icon { width: 16px; height: 16px; }
   .tab-panel { height: auto; }
   .tab-panel.active { min-height: 0; }
   .workspace-heading { margin-bottom: 19px; }
