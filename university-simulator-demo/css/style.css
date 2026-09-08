@@ -75,6 +75,20 @@ img { height: auto; }
 ::-webkit-scrollbar-track { background: transparent; }
 .icon-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 .ui-icon { width: 22px; height: 22px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.inline-icon { display: inline-block; width: 1.15em; height: 1.15em; margin-right: .3em; vertical-align: -.18em; }
+.quick-status-name, .state-item-name, .cap-card-title { display: inline-flex; align-items: center; gap: 5px; }
+.quick-status-name .inline-icon, .state-item-name .inline-icon, .cap-card-title .inline-icon { margin: 0; }
+.rest-card-icon .inline-icon, .growth-item-icon .inline-icon { display: block; margin: 0; }
+.rest-card-icon, .growth-item-icon { align-self: flex-start; padding-top: .25em; }
+.change-pill .inline-icon { width: 13px; height: 13px; margin-right: 5px; }
+.load-badge::before { content: ""; display: inline-block; width: 4px; height: 4px; margin: 0 5px 2px 0; border-radius: 50%; background: currentColor; }
+.route-icon .inline-icon { width: 25px; height: 25px; margin: 0; color: var(--primary); }
+.milestone-card-icon .inline-icon { width: 27px; height: 27px; margin: 0; color: var(--primary); }
+.resume-empty-icon { display: grid; place-items: center; margin-bottom: 14px; color: var(--primary); }
+.resume-empty-icon .inline-icon { width: 38px; height: 38px; margin: 0; stroke-width: 1.25; }
+.route-expand-btn::after { content: ""; display: inline-block; width: 5px; height: 5px; margin: 0 3px 2px 7px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); }
+.route-card.expanded .route-expand-btn::after { margin-bottom: 0; transform: rotate(225deg); }
+.menu-item-arrow .ui-icon { width: 16px; height: 16px; transform: rotate(-45deg); }
 .skip-link { position: fixed; top: -70px; left: 100px; z-index: 500; padding: 12px 20px; color: white; background: var(--primary); border-radius: 8px; }
 .skip-link:focus { top: 12px; }
 .section-kicker { display: block; font-size: 9px; line-height: 1.5; letter-spacing: 2.2px; color: var(--text-muted); font-weight: 500; }

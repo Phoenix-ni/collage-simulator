@@ -9,6 +9,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const { icon, setHTML, setText, formatDebugState } = window.CampusUI;
   // 核心运行时状态
   let engine = null;
   let currentTab = 'life'; // 'life' | 'growth' | 'routes' | 'history'
@@ -119,20 +120,20 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const FLAG_NARRATIVE_MAP = {
-    'FLAG_SO_CLUB_CORE': { title: '🏛️ 科技创新协会核心骨干', desc: '在校级学术社群中承担项目研发与核心组织职责' },
-    'FLAG_SO_COMP_PRIZE': { title: '🏆 数学建模竞赛国家二等奖', desc: '带领团队攻坚微分方程与启发式算法斩获国家级奖项' },
-    'FLAG_AC_PROJECT_PERFECT': { title: '💻 高性能持久化存储引擎', desc: '独立基于 C++ 研发 B+ 树并发存储引擎并获课程满分' },
-    'FLAG_WK_INTERN_ACCEPTED': { title: '🏢 科技企业日常后端实习', desc: '独立完成企业级微服务 API 研发与生产环境发布交付' },
-    'FLAG_WK_OFFER_SSP_ACCEPTED': { title: '💼 顶级大厂核心研发 SSP 录用', desc: '以最高档校招评级斩获一线互联网核心业务研发职位 (年薪 38W)' },
-    'FLAG_WK_OFFER_SP_ACCEPTED': { title: '💼 优质科技名企 SP 录用', desc: '通过多轮高强度专业终面斩获名企核心研发 Offer (年薪 28W)' },
-    'FLAG_REC_CAMP_PASS': { title: '🎓 顶尖学术夏令营优秀营员', desc: '在清华/华五顶尖学术夏令营考核中脱颖而出获得拟录取' },
-    'FLAG_REC_OFFER_ACCEPTED': { title: '📜 教育部推荐免试直博研究生', desc: '以前 5% 拔尖学业表现与学术成果提前锁定顶尖高校席位' },
-    'FLAG_GE_PASSED_FINAL': { title: '📖 全国硕士统考一战高分录取', desc: '考研初试 408 分以专业前 3% 优异成绩录取全日制硕士研究生' },
-    'FLAG_AI_CORE_ENTREPRENEUR': { title: '🔥 商业智能体创业技术合伙人', desc: '主导企业级 Multi-Agent 架构研发并助力团队完成早期融资' },
-    'FLAG_AI_JOINED_DEEP': { title: '🧪 前沿极客实战组正式成员', desc: '深度参与工业级开源项目交付并承担每月核心代码合并' },
-    'FLAG_AI_POLITELY_EXITED': { title: '🍃 极客圈人脉保留', desc: '体面告别高强度研发日常，保留了良好的行业人脉' },
-    'FLAG_REC_EXITED_FOR_WORK': { title: '🚀 毅然弃保从工·产业拓荒', desc: '在获得名校保研名额后遵从内心志向，毅然投身产业界与商业前沿' },
-    'FLAG_AC_THESIS_EXCELLENT': { title: '🌟 校级优秀本科毕业设计', desc: '毕业设计系统架构全票通过答辩并获评校级优秀毕业论文' }
+    'FLAG_SO_CLUB_CORE': { title: '科技创新协会核心骨干', desc: '在校级学术社群中承担项目研发与核心组织职责' },
+    'FLAG_SO_COMP_PRIZE': { title: '数学建模竞赛国家二等奖', desc: '带领团队攻坚微分方程与启发式算法斩获国家级奖项' },
+    'FLAG_AC_PROJECT_PERFECT': { title: '高性能持久化存储引擎', desc: '独立基于 C++ 研发 B+ 树并发存储引擎并获课程满分' },
+    'FLAG_WK_INTERN_ACCEPTED': { title: '科技企业日常后端实习', desc: '独立完成企业级微服务 API 研发与生产环境发布交付' },
+    'FLAG_WK_OFFER_SSP_ACCEPTED': { title: '顶级大厂核心研发 SSP 录用', desc: '以最高档校招评级斩获一线互联网核心业务研发职位 (年薪 38W)' },
+    'FLAG_WK_OFFER_SP_ACCEPTED': { title: '优质科技名企 SP 录用', desc: '通过多轮高强度专业终面斩获名企核心研发 Offer (年薪 28W)' },
+    'FLAG_REC_CAMP_PASS': { title: '顶尖学术夏令营优秀营员', desc: '在清华/华五顶尖学术夏令营考核中脱颖而出获得拟录取' },
+    'FLAG_REC_OFFER_ACCEPTED': { title: '教育部推荐免试直博研究生', desc: '以前 5% 拔尖学业表现与学术成果提前锁定顶尖高校席位' },
+    'FLAG_GE_PASSED_FINAL': { title: '全国硕士统考一战高分录取', desc: '考研初试 408 分以专业前 3% 优异成绩录取全日制硕士研究生' },
+    'FLAG_AI_CORE_ENTREPRENEUR': { title: '商业智能体创业技术合伙人', desc: '主导企业级 Multi-Agent 架构研发并助力团队完成早期融资' },
+    'FLAG_AI_JOINED_DEEP': { title: '前沿极客实战组正式成员', desc: '深度参与工业级开源项目交付并承担每月核心代码合并' },
+    'FLAG_AI_POLITELY_EXITED': { title: '极客圈人脉保留', desc: '体面告别高强度研发日常，保留了良好的行业人脉' },
+    'FLAG_REC_EXITED_FOR_WORK': { title: '毅然弃保从工·产业拓荒', desc: '在获得名校保研名额后遵从内心志向，毅然投身产业界与商业前沿' },
+    'FLAG_AC_THESIS_EXCELLENT': { title: '校级优秀本科毕业设计', desc: '毕业设计系统架构全票通过答辩并获评校级优秀毕业论文' }
   };
 
   // ================= 2. 初始化与主循环 =================
@@ -186,17 +187,17 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderTopBar(s) {
     const tl = engine.getCurrentTimeline();
     if (elTopStageText) {
-      elTopStageText.textContent = `${tl.name.split(' (')[0]} · 第 ${s.total_month} 月`;
+      setText(elTopStageText, `${tl.name.split(' (')[0]} · 第 ${s.total_month} 月`);
     }
     if (elTopTuVal) {
       const timeQual = window.getTimeQualitative(s.resources.TU_current, 10);
-      elTopTuVal.textContent = `【${timeQual.text}】`;
+      setText(elTopTuVal, `【${timeQual.text}】`);
       const resTuChip = document.getElementById('res-tu-chip');
       if (resTuChip) resTuChip.title = `自由时间: 【${timeQual.text}】 · ${timeQual.desc}`;
     }
     if (elTopEpVal) {
       const energyQual = window.getEnergyQualitative(s.resources.EP_current, s.resources.EP_max);
-      elTopEpVal.textContent = `【${energyQual.text}】`;
+      setText(elTopEpVal, `【${energyQual.text}】`);
       const resEpChip = document.getElementById('res-ep-chip');
       if (resEpChip) resEpChip.title = `精力状态: 【${energyQual.text}】 · ${energyQual.desc}`;
     }
@@ -219,11 +220,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // 多事件切换条
       if (availableEvents.length > 1) {
         elEventSwitchBar.style.display = 'flex';
-        elEventSwitchChips.innerHTML = availableEvents.map(e => {
+        setHTML(elEventSwitchChips, availableEvents.map(e => {
           const isActive = e.event_id === selectedEventId;
           const pkgName = PACKAGE_NAMES[e.package.toLowerCase()] || e.package;
           return `<button class="switch-chip ${isActive ? 'active' : ''}" data-ev-id="${e.event_id}">${pkgName} · ${e.title}</button>`;
-        }).join('');
+        }).join(''));
 
         elEventSwitchChips.querySelectorAll('.switch-chip').forEach(chip => {
           chip.addEventListener('click', () => {
@@ -238,13 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // 渲染当前主事件卡
       const curEvent = availableEvents.find(e => e.event_id === selectedEventId) || availableEvents[0];
       if (curEvent) {
-        elCurEventPkgTag.textContent = PACKAGE_NAMES[curEvent.package.toLowerCase()] || curEvent.package;
-        elCurEventMonthTag.textContent = `第 ${s.total_month} 个月`;
-        elCurEventTitle.textContent = curEvent.title;
-        elCurEventScene.innerHTML = `<p>${curEvent.content.scene}</p>`;
+        setText(elCurEventPkgTag, PACKAGE_NAMES[curEvent.package.toLowerCase()] || curEvent.package);
+        setText(elCurEventMonthTag, `第 ${s.total_month} 个月`);
+        setText(elCurEventTitle, curEvent.title);
+        setHTML(elCurEventScene, `<p>${curEvent.content.scene}</p>`);
 
         // 渲染可选行动卡片 (隐藏底层 TU/EP 算术数值，仅展示定性负荷、导向与权衡)
-        elActionCardsGrid.innerHTML = curEvent.choices.map(c => {
+        setHTML(elActionCardsGrid, curEvent.choices.map(c => {
           const costTU = (c.cost && c.cost.TU) || 0;
           const costEP = (c.cost && c.cost.EP) || 0;
           const hasEnoughTU = s.resources.TU_current >= costTU;
@@ -259,9 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
           let disabledHintText = '';
           if (isRecoveryLocked) {
-            disabledHintText = '⚠️ 身体处于透支恢复锁，需要先休整调整状态';
+            disabledHintText = '身体处于透支恢复锁，需要先休整调整状态';
           } else if (!hasEnoughTU) {
-            disabledHintText = '⚠️ 本月剩余时间不足，无法执行该安排';
+            disabledHintText = '本月剩余时间不足，无法执行该安排';
           }
 
           return `
@@ -275,19 +276,19 @@ document.addEventListener('DOMContentLoaded', () => {
               </div>
               ${(intent || tradeoff) ? `
                 <div class="action-intent-text">
-                  ${intent ? `<div>🎯 <strong>导向：</strong>${intent}</div>` : ''}
-                  ${tradeoff ? `<div style="color:#64748b; font-size:0.8rem;">⚖️ <strong>权衡：</strong>${tradeoff}</div>` : ''}
+                  ${intent ? `<div>${icon('target')} <strong>导向：</strong>${intent}</div>` : ''}
+                  ${tradeoff ? `<div style="color:#64748b; font-size:0.8rem;">${icon('scale')} <strong>权衡：</strong>${tradeoff}</div>` : ''}
                 </div>
               ` : ''}
               <div class="action-footer-row">
                 <div class="action-cost-tags">
-                  ${disabledHintText ? `<span class="action-disabled-hint">${disabledHintText}</span>` : ''}
-                  ${(!isRecoveryLocked && hasEnoughTU && isOverdraftRisk) ? `<span class="action-overdraft-warn">⚠️ 精力透支预警 (当前状态无法轻松承担，将预支扣减下月精力)</span>` : ''}
+                  ${disabledHintText ? `<span class="action-disabled-hint">${icon('warning')} ${disabledHintText}</span>` : ''}
+                  ${(!isRecoveryLocked && hasEnoughTU && isOverdraftRisk) ? `<span class="action-overdraft-warn">${icon('warning')} 精力透支预警 (当前状态无法轻松承担，将预支扣减下月精力)</span>` : ''}
                 </div>
               </div>
             </div>
           `;
-        }).join('');
+        }).join(''));
 
         // 绑定行动点击 (注意：applyChoice 成功后绝不调用 nextMonth()，仅记录结果并切入 result 行动反馈)
         elActionCardsGrid.querySelectorAll('.action-card').forEach(card => {
@@ -310,13 +311,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       } else {
         // 无可用事件时的空档期
-        elCurEventPkgTag.textContent = '校园日常';
-        elCurEventMonthTag.textContent = `第 ${s.total_month} 个月`;
-        elCurEventTitle.textContent = '本月大学生活平稳推进中';
-        elCurEventScene.innerHTML = '<p>各项学业与日常按部就班，点击下方推进按钮进入下一阶段。</p>';
-        elActionCardsGrid.innerHTML = `
+        setText(elCurEventPkgTag, '校园日常');
+        setText(elCurEventMonthTag, `第 ${s.total_month} 个月`);
+        setText(elCurEventTitle, '本月大学生活平稳推进中');
+        setHTML(elCurEventScene, '<p>各项学业与日常按部就班，点击下方推进按钮进入下一阶段。</p>');
+        setHTML(elActionCardsGrid, `
           <button class="btn-primary-advance" id="btn-empty-advance">推进到下个月 &rarr;</button>
-        `;
+        `);
         const btnEmpty = document.getElementById('btn-empty-advance');
         if (btnEmpty) {
           btnEmpty.addEventListener('click', () => {
@@ -328,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // 渲染系统级通用行动：🌿 休息调整卡片
+      // 渲染系统级通用行动：休息调整卡片
       const elSystemRestSection = document.getElementById('system-rest-section');
       if (elSystemRestSection) {
         const canRest = s.resources.TU_current >= 1;
@@ -339,15 +340,15 @@ document.addEventListener('DOMContentLoaded', () => {
           restDesc = '最近身心显露疲态，适当休息能够有效缓解负荷，为后续攻坚储备精力。';
         }
 
-        elSystemRestSection.innerHTML = `
+        setHTML(elSystemRestSection, `
           <div class="rest-action-card ${!canRest ? 'disabled' : ''} ${isRecoveryLocked ? 'recovery-highlight' : ''}" id="btn-action-rest">
             <div class="rest-card-head">
               <div class="rest-card-title">
-                <span class="rest-card-icon">🌿</span>
+                <span class="rest-card-icon">${icon('leaf')}</span>
                 <span><strong>休息调整</strong> · 休整调理身心</span>
               </div>
               <span class="rest-badge ${isRecoveryLocked ? 'rest-badge-urgent' : 'rest-badge-normal'}">
-                ${isRecoveryLocked ? '⚠️ 亟需休整' : '身心调理'}
+                ${isRecoveryLocked ? '亟需休整' : '身心调理'}
               </span>
             </div>
             <div class="rest-card-body">
@@ -355,11 +356,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="rest-card-footer">
               ${canRest 
-                ? `<span class="rest-cta-text">👉 ${isRecoveryLocked ? '立即安排休息调理' : '安排休整调理'}</span>`
-                : `<span class="action-disabled-hint">⚠️ 本月可用时间已耗尽，无法继续休整</span>`}
+                ? `<span class="rest-cta-text">${icon('arrow')} ${isRecoveryLocked ? '立即安排休息调理' : '安排休整调理'}</span>`
+                : `<span class="action-disabled-hint">${icon('warning')} 本月可用时间已耗尽，无法继续休整</span>`}
             </div>
           </div>
-        `;
+        `);
 
         const btnRest = document.getElementById('btn-action-rest');
         if (btnRest && canRest) {
@@ -386,13 +387,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lastChoiceResult) {
         const item = lastChoiceResult.historyItem;
         if (lastChoiceResult.type === 'REST') {
-          elResultTitle.textContent = '本次休整反馈';
-          elResultSubtitle.textContent = '安排决策：暂时休整调理身心';
-          elResultStoryText.textContent = item.resultText || '你给自己留出了一段休整时间，没有继续给日程加码，身心精力得到了恢复。';
+          setText(elResultTitle, '本次休整反馈');
+          setText(elResultSubtitle, '安排决策：暂时休整调理身心');
+          setText(elResultStoryText, item.resultText || '你给自己留出了一段休整时间，没有继续给日程加码，身心精力得到了恢复。');
         } else {
-          elResultTitle.textContent = '本次行动反馈';
-          elResultSubtitle.textContent = `行动决策：${item.choiceText}`;
-          elResultStoryText.textContent = item.resultText || '你顺利完成了当下的安排，大学履历沉淀更进一步。';
+          setText(elResultTitle, '本次行动反馈');
+          setText(elResultSubtitle, `行动决策：${item.choiceText}`);
+          setText(elResultStoryText, item.resultText || '你顺利完成了当下的安排，大学履历沉淀更进一步。');
         }
 
         // 整理定性变化 (纯定性自然语言，杜绝底层数值泄露)
@@ -413,14 +414,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let changesHtml = '';
         if (item.qualitative_changes && item.qualitative_changes.length > 0) {
-          changesHtml += item.qualitative_changes.map(qc => `<span class="change-pill pos">📈 ${qc}</span>`).join('');
+          changesHtml += item.qualitative_changes.map(qc => `<span class="change-pill pos">${icon('trend-up')} ${qc}</span>`).join('');
         } else if (item.varDeltas) {
           changesHtml += Object.entries(item.varDeltas).map(([k, deltaStr]) => {
             const num = parseFloat(deltaStr);
             const map = deltaQualitativeMap[k];
             if (map) {
               const text = num > 0 ? map.pos : map.neg;
-              return `<span class="change-pill ${num > 0 ? 'pos' : 'neg'}">${num > 0 ? '📈' : '📉'} ${text}</span>`;
+              return `<span class="change-pill ${num > 0 ? 'pos' : 'neg'}">${icon(num > 0 ? 'trend-up' : 'trend-down')} ${text}</span>`;
             }
             return '';
           }).filter(Boolean).join('');
@@ -429,18 +430,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (item.tagsAdded && item.tagsAdded.length > 0) {
           changesHtml += item.tagsAdded.map(tag => {
             const mapped = FLAG_NARRATIVE_MAP[tag];
-            return `<span class="change-pill tag">🏷️ ${mapped ? mapped.title : tag}</span>`;
+            return `<span class="change-pill tag">${icon('tag')} ${mapped ? mapped.title : tag}</span>`;
           }).join('');
         }
 
         if (s.resources.overdraft_EP > 0) {
-          changesHtml += `<span class="change-pill neg">⚡ 本月形成了精力透支，下个月开局状态会受到一定影响</span>`;
+          changesHtml += `<span class="change-pill neg">${icon('bolt')} 本月形成了精力透支，下个月开局状态会受到一定影响</span>`;
         }
 
         if (!changesHtml) {
-          changesHtml = '<span class="change-pill pos">🌿 平稳过渡</span>';
+          changesHtml = `<span class="change-pill pos">${icon('leaf')} 平稳过渡</span>`;
         }
-        elResultChangesList.innerHTML = changesHtml;
+        setHTML(elResultChangesList, changesHtml);
 
         // 计算本月是否还可以继续安排事件或休息 (月内循环多事件与休整判断)
         const remainingEvents = engine.getAvailableEvents();
@@ -462,17 +463,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const elResultFooter = document.getElementById('result-footer-actions') || document.querySelector('.result-footer');
         if (elResultFooter) {
           if (canContinueThisMonth) {
-            const continueBtnText = s.resources.recovery_lock ? '👉 先休息调整' : '👉 继续安排本月';
-            elResultFooter.innerHTML = `
+            const continueBtnText = s.resources.recovery_lock ? '先休息调整' : '继续安排本月';
+            setHTML(elResultFooter, `
               <div class="result-actions-row">
                 <button class="btn-primary-advance" id="btn-result-continue-month">
-                  <span>${continueBtnText}</span>
+                  <span>${icon('arrow')} ${continueBtnText}</span>
                 </button>
                 <button class="btn-secondary-advance" id="btn-result-next-month">
                   <span>结束本月，进入下个月 (${nextName}) &rarr;</span>
                 </button>
               </div>
-            `;
+            `);
             const btnContinue = document.getElementById('btn-result-continue-month');
             if (btnContinue) {
               btnContinue.onclick = () => {
@@ -482,13 +483,13 @@ document.addEventListener('DOMContentLoaded', () => {
               };
             }
           } else {
-            elResultFooter.innerHTML = `
+            setHTML(elResultFooter, `
               <div class="result-actions-row">
                 <button class="btn-primary-advance" id="btn-result-next-month">
                   <span>结束本月，进入下个月 (${nextName}) &rarr;</span>
                 </button>
               </div>
-            `;
+            `);
           }
 
           const btnNext = document.getElementById('btn-result-next-month');
@@ -520,22 +521,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const cap = s.capabilities;
 
     const quickItems = [
-      { name: '📚 学业绩点', val: b.academic, qual: window.getBasicStateQualitative('academic', b.academic) },
-      { name: '🌿 身心健康', val: b.health, qual: window.getBasicStateQualitative('health', b.health) },
-      { name: '🎯 专注定力', val: cap.focus, qual: window.getCapQualitative('focus', cap.focus) },
-      { name: '🤝 社交人脉', val: b.social, qual: window.getBasicStateQualitative('social', b.social) },
-      { name: '🏡 家庭支持', val: b.family, qual: window.getBasicStateQualitative('family', b.family) }
+      { name: '学业绩点', icon: 'book', val: b.academic, qual: window.getBasicStateQualitative('academic', b.academic) },
+      { name: '身心健康', icon: 'leaf', val: b.health, qual: window.getBasicStateQualitative('health', b.health) },
+      { name: '专注定力', icon: 'target', val: cap.focus, qual: window.getCapQualitative('focus', cap.focus) },
+      { name: '社交人脉', icon: 'users', val: b.social, qual: window.getBasicStateQualitative('social', b.social) },
+      { name: '家庭支持', icon: 'home', val: b.family, qual: window.getBasicStateQualitative('family', b.family) }
     ];
 
-    elQuickStatusList.innerHTML = quickItems.map(item => {
+    setHTML(elQuickStatusList, quickItems.map(item => {
       const range = window.getRangeLevel(item.val);
       return `
         <div class="quick-status-row">
-          <span class="quick-status-name">${item.name}</span>
+          <span class="quick-status-name">${icon(item.icon)} ${item.name}</span>
           <span class="quick-status-badge badge-${range.badge}">${item.qual.level}</span>
         </div>
       `;
-    }).join('');
+    }).join(''));
 
     // 最近成长
     const recentLogs = s.history.history_log.filter(l => l.type === 'ACTION').slice(0, 2);
@@ -543,14 +544,14 @@ document.addEventListener('DOMContentLoaded', () => {
     recentLogs.forEach(l => {
       if (l.qualitative_changes && l.qualitative_changes.length > 0) {
         l.qualitative_changes.slice(0, 2).forEach(qc => {
-          growthHtml += `<div class="growth-item-row"><span class="growth-item-icon">↑</span><span>${qc}</span></div>`;
+          growthHtml += `<div class="growth-item-row"><span class="growth-item-icon">${icon('trend-up')}</span><span>${qc}</span></div>`;
         });
       }
     });
     if (!growthHtml) {
       growthHtml = '<div class="growth-item-row"><span style="color:#94a3b8;">新学期起步，积极行动中</span></div>';
     }
-    elRecentGrowthList.innerHTML = growthHtml;
+    setHTML(elRecentGrowthList, growthHtml);
 
     // 快捷跳转成长页
     if (elLinkToGrowthBtn) {
@@ -566,21 +567,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const cap = s.capabilities;
 
     const basicConfigs = {
-      academic: { name: '学业绩点', icon: '📚' },
-      health:   { name: '身心健康', icon: '🌿' },
-      social:   { name: '社交人脉', icon: '🤝' },
-      romance:  { name: '情感生活', icon: '💖' },
-      family:   { name: '家庭支持', icon: '🏡' }
+      academic: { name: '学业绩点', icon: 'book' },
+      health:   { name: '身心健康', icon: 'leaf' },
+      social:   { name: '社交人脉', icon: 'users' },
+      romance:  { name: '情感生活', icon: 'heart' },
+      family:   { name: '家庭支持', icon: 'home' }
     };
 
-    elGrowthBasicStatesGrid.innerHTML = Object.entries(b).map(([k, v]) => {
-      const cfg = basicConfigs[k] || { name: k, icon: '⭐' };
+    setHTML(elGrowthBasicStatesGrid, Object.entries(b).map(([k, v]) => {
+      const cfg = basicConfigs[k] || { name: k, icon: 'spark' };
       const qual = window.getBasicStateQualitative(k, v);
       const range = window.getRangeLevel(v);
       return `
         <div class="state-card-item">
           <div class="state-item-head">
-            <span class="state-item-name">${cfg.icon} ${cfg.name}</span>
+            <span class="state-item-name">${icon(cfg.icon)} ${cfg.name}</span>
             <span class="badge badge-${range.badge}">${qual.level}</span>
           </div>
           <div class="state-item-bar">
@@ -589,36 +590,36 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="state-item-desc">${qual.desc}</div>
         </div>
       `;
-    }).join('');
+    }).join(''));
 
     // 七维多边形雷达图
-    elGrowthRadarWrapper.innerHTML = generateRadarChartSVG(cap);
+    setHTML(elGrowthRadarWrapper, generateRadarChartSVG(cap));
 
     // 七大能力卡片
     const capConfigs = {
-      portfolio:  { name: '代码作品集', icon: '💻' },
-      research:   { name: '学术科研力', icon: '🔬' },
-      skill:      { name: '工程硬技能', icon: '⚡' },
-      delivery:   { name: '闭环交付力', icon: '📦' },
-      reputation: { name: '行业口碑', icon: '🌟' },
-      focus:      { name: '专注定力', icon: '🎯' },
-      ai_depth:   { name: '前沿 AI 深度', icon: '🤖' }
+      portfolio:  { name: '代码作品集', icon: 'code' },
+      research:   { name: '学术科研力', icon: 'flask' },
+      skill:      { name: '工程硬技能', icon: 'bolt' },
+      delivery:   { name: '闭环交付力', icon: 'box' },
+      reputation: { name: '行业口碑', icon: 'award' },
+      focus:      { name: '专注定力', icon: 'target' },
+      ai_depth:   { name: '前沿 AI 深度', icon: 'chip' }
     };
 
-    elGrowthCapGrid.innerHTML = Object.entries(cap).map(([k, v]) => {
-      const cfg = capConfigs[k] || { name: k, icon: '✨' };
+    setHTML(elGrowthCapGrid, Object.entries(cap).map(([k, v]) => {
+      const cfg = capConfigs[k] || { name: k, icon: 'spark' };
       const qual = window.getCapQualitative(k, v);
       const range = window.getRangeLevel(v);
       return `
         <div class="cap-card-item">
           <div class="cap-card-top">
-            <span class="cap-card-title">${cfg.icon} ${cfg.name}</span>
+            <span class="cap-card-title">${icon(cfg.icon)} ${cfg.name}</span>
             <span class="badge badge-${range.badge}">${qual.level}</span>
           </div>
           <div class="cap-card-desc">${qual.desc}</div>
         </div>
       `;
-    }).join('');
+    }).join(''));
   }
 
   // ================= 6. 一级页面: 路线 (Routes View) =================
@@ -627,7 +628,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         key: 'work',
         name: '校招就业路线 (Work Path)',
-        icon: '💼',
+        icon: 'briefcase',
         status: s.routes.work.status,
         progress: Math.min(100, Math.round((s.capabilities.skill * 0.35 + s.capabilities.portfolio * 0.35 + s.capabilities.delivery * 0.3))),
         summary: '以工业级代码作品、高并发工程经验与大厂实习为核心的求职之路。',
@@ -638,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         key: 'postgrad_rec',
         name: '名校保研推免 (Recommendation)',
-        icon: '🎓',
+        icon: 'graduation',
         status: s.routes.postgrad_rec.status,
         progress: Math.min(100, Math.round(s.basic_states.academic * 0.6 + s.capabilities.research * 0.4)),
         summary: '以专业前 5% 拔尖绩点、重点实验室科研成果与权威夏令营拟录取为核心。',
@@ -649,7 +650,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         key: 'postgrad_exam',
         name: '全国考研统考 (Postgrad Exam)',
-        icon: '📖',
+        icon: 'book',
         status: s.routes.postgrad_exam.status,
         progress: Math.min(100, Math.round(s.routes.postgrad_exam.exam_prep * 0.7 + s.capabilities.focus * 0.3)),
         summary: '以数学一、英语一与计算机专业综合 408 深度复习为核心的一战成硕之路。',
@@ -660,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         key: 'ailab',
         name: '极客工程与创业 (Geek & AI)',
-        icon: '🧪',
+        icon: 'flask',
         status: s.routes.ailab.phase,
         isGeek: true,
         progress: Math.min(100, Math.round(s.capabilities.ai_depth * 0.5 + s.capabilities.delivery * 0.5)),
@@ -671,7 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     ];
 
-    elRoutesCardsContainer.innerHTML = routesData.map(r => {
+    setHTML(elRoutesCardsContainer, routesData.map(r => {
       const isExpanded = !!expandedRoutes[r.key];
       const ailabInfo = r.isGeek ? window.getAILabPhaseCN(r.status) : null;
       const statusBadgeText = r.isGeek ? ailabInfo.statusBadge : window.getRouteStatusCN(r.status);
@@ -682,7 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="route-card" style="border-style:dashed; opacity:0.8;">
             <div class="route-card-header">
               <div class="route-title-group">
-                <span class="route-icon">❓</span>
+                <span class="route-icon">${icon('help')}</span>
                 <span class="route-name" style="color:#64748b;">？？？ (未探索的课外机遇)</span>
               </div>
               <span class="badge badge-neutral">未解开线索</span>
@@ -698,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="route-card ${isExpanded ? 'expanded' : ''}" data-route-key="${r.key}">
           <div class="route-card-header" data-route-trigger="${r.key}">
             <div class="route-title-group">
-              <span class="route-icon">${r.icon}</span>
+              <span class="route-icon">${icon(r.icon)}</span>
               <span class="route-name">${r.name}</span>
             </div>
             <div class="route-progress-wrap">
@@ -706,7 +707,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="route-progress-bar-fill" style="width: ${r.progress}%;"></div>
               </div>
               <span class="badge badge-primary">${statusBadgeText}</span>
-              <button class="route-expand-btn">${isExpanded ? '收起 ▲' : '详情 ▼'}</button>
+              <button class="route-expand-btn">${isExpanded ? '收起' : '详情'}</button>
             </div>
           </div>
           <div class="route-summary-text">${r.summary}</div>
@@ -714,22 +715,22 @@ document.addEventListener('DOMContentLoaded', () => {
           ${isExpanded ? `
             <div class="route-detail-drawer">
               <div class="route-detail-block">
-                <span class="detail-block-label">✨ 当前竞争优势：</span>
+                <span class="detail-block-label">${icon('spark')} 当前竞争优势：</span>
                 <span class="detail-block-content">${r.strengths}</span>
               </div>
               <div class="route-detail-block">
-                <span class="detail-block-label">⚠️ 关键瓶颈与挑战：</span>
+                <span class="detail-block-label">${icon('warning')} 关键瓶颈与挑战：</span>
                 <span class="detail-block-content">${r.bottlenecks}</span>
               </div>
               <div class="route-detail-block">
-                <span class="detail-block-label">🏆 关键里程碑进展：</span>
+                <span class="detail-block-label">${icon('award')} 关键里程碑进展：</span>
                 <span class="detail-block-content">${r.milestone}</span>
               </div>
             </div>
           ` : ''}
         </div>
       `;
-    }).join('');
+    }).join(''));
 
     // 绑定展开点击
     elRoutesCardsContainer.querySelectorAll('[data-route-trigger]').forEach(header => {
@@ -764,9 +765,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // 1. 人生大事记时间轴
       const logs = s.history.history_log.filter(l => l.type === 'ACTION');
       if (logs.length === 0) {
-        elHistoryTimelineList.innerHTML = '<div style="text-align:center; padding:32px; color:#94a3b8;">你的人生履历才刚刚开始，去创造属于你的大学回忆吧。</div>';
+        setHTML(elHistoryTimelineList, '<div style="text-align:center; padding:32px; color:#94a3b8;">你的人生履历才刚刚开始，去创造属于你的大学回忆吧。</div>');
       } else {
-        elHistoryTimelineList.innerHTML = logs.map(l => {
+        setHTML(elHistoryTimelineList, logs.map(l => {
           const bullets = (l.qualitative_changes && l.qualitative_changes.length > 0)
             ? l.qualitative_changes.map(qc => `<span class="change-pill pos">${qc}</span>`).join('')
             : '';
@@ -776,39 +777,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="timeline-month-badge">[第 ${l.month} 个月 · ${l.timeName ? l.timeName.split(' (')[0] : ''}]</span>
                 <span class="badge badge-neutral">${l.eventTitle}</span>
               </div>
-              <div class="timeline-title">👉 采取行动：${l.choiceText}</div>
+              <div class="timeline-title">${icon('arrow')} 采取行动：${l.choiceText}</div>
               <div class="timeline-desc">${l.resultText}</div>
               ${bullets ? `<div class="timeline-tags">${bullets}</div>` : ''}
             </div>
           `;
-        }).join('');
+        }).join(''));
       }
     } else if (currentSubtab === 'milestones') {
       // 2. 关键里程碑
       const flagsKeys = Object.keys(s.history.flags);
       if (flagsKeys.length === 0) {
-        elHistoryMilestonesGrid.innerHTML = '<div style="text-align:center; padding:32px; color:#94a3b8; grid-column:1/-1;">尚未解锁关键人生里程碑，在大学四年中积极把握机遇吧！</div>';
+        setHTML(elHistoryMilestonesGrid, '<div style="text-align:center; padding:32px; color:#94a3b8; grid-column:1/-1;">尚未解锁关键人生里程碑，在大学四年中积极把握机遇吧！</div>');
       } else {
-        elHistoryMilestonesGrid.innerHTML = flagsKeys.map(k => {
-          const mapped = FLAG_NARRATIVE_MAP[k] || { title: `🏷️ ${k}`, desc: '达成关键发展经历节点' };
+        setHTML(elHistoryMilestonesGrid, flagsKeys.map(k => {
+          const mapped = FLAG_NARRATIVE_MAP[k] || { title: `${k}`, desc: '达成关键发展经历节点' };
           return `
             <div class="milestone-badge-card">
-              <span class="milestone-card-icon">🎖️</span>
+              <span class="milestone-card-icon">${icon('award')}</span>
               <div>
                 <div class="milestone-card-title">${mapped.title}</div>
                 <div class="milestone-card-desc">${mapped.desc}</div>
               </div>
             </div>
           `;
-        }).join('');
+        }).join(''));
       }
     } else if (currentSubtab === 'projects') {
       // 3. STAR 项目库
       const pool = s.history.resume_pool || [];
       if (pool.length === 0) {
-        elHistoryProjectsList.innerHTML = '<div style="text-align:center; padding:32px; color:#94a3b8;">暂无独立主导的工程项目经历积累。</div>';
+        setHTML(elHistoryProjectsList, '<div style="text-align:center; padding:32px; color:#94a3b8;">暂无独立主导的工程项目经历积累。</div>');
       } else {
-        elHistoryProjectsList.innerHTML = pool.map(p => `
+        setHTML(elHistoryProjectsList, pool.map(p => `
           <div class="project-card">
             <div class="project-card-top">
               <span class="project-card-name">${p.title}</span>
@@ -816,25 +817,25 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="project-card-desc">${p.description}</div>
           </div>
-        `).join('');
+        `).join(''));
       }
     } else if (currentSubtab === 'resume-view') {
       // 4. 毕业成果预览 / 正式简历
       if (s.game_over && s.final_resume) {
         renderResumeModalContent(s.final_resume, elHistoryResumePreview);
       } else {
-        elHistoryResumePreview.innerHTML = `
+        setHTML(elHistoryResumePreview, `
           <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:36px; text-align:center;">
-            <div style="font-size:2.5rem; margin-bottom:12px;">📄</div>
+            <div class="resume-empty-icon">${icon('document')}</div>
             <h3 style="font-size:1.15rem; font-weight:800; margin-bottom:6px;">毕业成果与标准简历正在形成中</h3>
             <p style="font-size:0.86rem; color:#64748b; max-width:440px; margin:0 auto 16px auto;">
               当前处于大学第 ${s.total_month}/42 个月。四年来积累的学业成绩、科研论文、大厂实习与极客项目将在大四 6 月毕业典礼时全景收口为大赛级标准 A4 毕业简历与毕业去向荣誉证书。
             </p>
             <div style="display:inline-block; background:#f1f5f9; padding:6px 16px; border-radius:9999px; font-size:0.8rem; font-weight:700; color:#3b82f6;">
-              ⏳ 距大学毕业收口还剩 ${Math.max(0, 42 - s.total_month)} 个月
+              ${icon('clock')} 距大学毕业收口还剩 ${Math.max(0, 42 - s.total_month)} 个月
             </div>
           </div>
-        `;
+        `);
       }
     }
   }
@@ -860,13 +861,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================= 9. 七维多边形能力雷达图生成器 =================
   function generateRadarChartSVG(cap) {
     const dimensions = [
-      { key: 'portfolio', name: '作品集', icon: '💻' },
-      { key: 'research', name: '学术科研', icon: '🔬' },
-      { key: 'skill', name: '工程硬技能', icon: '⚡' },
-      { key: 'delivery', name: '闭环交付力', icon: '📦' },
-      { key: 'reputation', name: '行业口碑', icon: '🌟' },
-      { key: 'focus', name: '专注定力', icon: '🎯' },
-      { key: 'ai_depth', name: '前沿AI深度', icon: '🤖' }
+      { key: 'portfolio', name: '作品集' },
+      { key: 'research', name: '学术科研' },
+      { key: 'skill', name: '工程硬技能' },
+      { key: 'delivery', name: '闭环交付力' },
+      { key: 'reputation', name: '行业口碑' },
+      { key: 'focus', name: '专注定力' },
+      { key: 'ai_depth', name: '前沿AI深度' }
     ];
 
     const N = dimensions.length;
@@ -908,7 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       labelsHtml += `
         <g transform="translate(${lx.toFixed(1)}, ${ly.toFixed(1)})">
-          <text x="0" y="-3" text-anchor="${textAnchor}" class="radar-label-title">${dim.icon} ${dim.name}</text>
+          <text x="0" y="-3" text-anchor="${textAnchor}" class="radar-label-title">${dim.name}</text>
           <text x="0" y="11" text-anchor="${textAnchor}" class="radar-label-sub">${qual.level}</text>
         </g>
       `;
@@ -962,40 +963,40 @@ document.addEventListener('DOMContentLoaded', () => {
         ? end.regrets.map(r => `<li>${r}</li>`).join('')
         : '<li>无重大遗憾</li>';
 
-      container.innerHTML = `
+      setHTML(container, `
         <div class="parents-outcome-card">
           <div class="outcome-cert-header">
-            <div class="cert-stamp-badge">🏆 ${end.rank} 级毕业成就</div>
+            <div class="cert-stamp-badge">${icon('award')} ${end.rank} 级毕业成就</div>
             <h2 class="cert-main-title">${end.title || end.name}</h2>
             <div class="cert-subtitle">本科毕业发展收口认定证书 · 2030届</div>
           </div>
           <div class="outcome-destination-banner">
-            <div class="outcome-dest-label">🎯 最终毕业去向 / 录取录用单位</div>
+            <div class="outcome-dest-label">${icon('target')} 最终毕业去向 / 录取录用单位</div>
             <div class="outcome-dest-name">${end.destination || end.name}</div>
             <div class="outcome-salary-box">
-              <span>💰 预期待遇：</span>
+              <span>${icon('coins')} 预期待遇：</span>
               <span>${end.salary || '阶段性发展'}</span>
             </div>
           </div>
           <div class="outcome-details-grid">
             <div class="outcome-box">
-              <div class="outcome-box-title">✨ 四年高光时刻</div>
+              <div class="outcome-box-title">${icon('spark')} 四年高光时刻</div>
               <ul class="outcome-list highlights">${highlightsHtml}</ul>
             </div>
             <div class="outcome-box">
-              <div class="outcome-box-title">💭 人生遗憾与代价</div>
+              <div class="outcome-box-title">${icon('chat')} 人生遗憾与代价</div>
               <ul class="outcome-list regrets">${regretsHtml}</ul>
             </div>
           </div>
           <div class="outcome-box" style="margin-bottom:16px;">
-            <div class="outcome-box-title">📊 毕业七大核心能力资产雷达图</div>
+            <div class="outcome-box-title">${icon('chart')} 毕业七大核心能力资产雷达图</div>
             ${generateRadarChartSVG(resume.capabilities)}
           </div>
           <div class="outcome-desc-text">
-            <strong>🎓 毕业评语：</strong>${end.desc}
+            <strong>${icon('graduation')} 毕业评语：</strong>${end.desc}
           </div>
         </div>
-      `;
+      `);
     } else {
       const projectEntries = resume.entries.filter(e => e.category === '项目研发' || e.category === '开源项目' || e.category === '科研学术');
       const otherEntries = resume.entries.filter(e => e.category !== '项目研发' && e.category !== '开源项目' && e.category !== '科研学术');
@@ -1018,7 +1019,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `).join('') || '<p style="font-size:0.84rem; color:#64748b;">完成大学常规培养计划，无违纪记录。</p>';
 
-      container.innerHTML = `
+      setHTML(container, `
         <div class="standard-resume">
           <div class="resume-paper-header">
             <div>
@@ -1026,13 +1027,13 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="resume-target-title">毕业去向：${resume.ending.name}</div>
             </div>
             <div class="resume-contact-info">
-              <div>🎓 毕业年份：${resume.graduation_date}</div>
-              <div>📍 毕业院校：${resume.university} (${resume.major})</div>
-              <div>⭐ 学业评估：${resume.academic_evaluation}</div>
+              <div>${icon('graduation')} 毕业年份：${resume.graduation_date}</div>
+              <div>${icon('pin')} 毕业院校：${resume.university} (${resume.major})</div>
+              <div>${icon('award')} 学业评估：${resume.academic_evaluation}</div>
             </div>
           </div>
           <div class="resume-block">
-            <div class="resume-block-heading">🎓 教育背景 / Education</div>
+            <div class="resume-block-heading">${icon('graduation')} 教育背景 / Education</div>
             <div class="resume-edu-row">
               <span>${resume.university} · 计算机科学与技术</span>
               <span>工学学士 (2026.09 - 2030.06)</span>
@@ -1043,19 +1044,19 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
           <div class="resume-block">
-            <div class="resume-block-heading">💻 核心项目与科研经历 / Projects & Research (STAR)</div>
+            <div class="resume-block-heading">${icon('code')} 核心项目与科研经历 / Projects & Research (STAR)</div>
             ${projectsHtml}
           </div>
           <div class="resume-block">
-            <div class="resume-block-heading">🏆 荣誉竞赛与实习历程 / Honors & Activities</div>
+            <div class="resume-block-heading">${icon('award')} 荣誉竞赛与实习历程 / Honors & Activities</div>
             ${honorsHtml}
           </div>
           <div class="resume-block">
-            <div class="resume-block-heading">⚡ 专业技能与综合能力雷达 / Professional Skills & Radar</div>
+            <div class="resume-block-heading">${icon('bolt')} 专业技能与综合能力雷达 / Professional Skills & Radar</div>
             ${generateRadarChartSVG(resume.capabilities)}
           </div>
         </div>
-      `;
+      `);
     }
   }
 
@@ -1105,7 +1106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     elMenuBtnSave.onclick = () => {
       try {
         localStorage.setItem('univ_sim_save_v2', JSON.stringify(engine.state));
-        alert('💾 游戏进度已成功保存在本地浏览器！');
+        alert('游戏进度已成功保存在本地浏览器！');
         if (elMenuModal) elMenuModal.style.display = 'none';
       } catch (err) {
         alert('保存失败：' + err.message);
@@ -1122,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
         initGame(JSON.parse(saved));
-        alert('📂 已成功读取并恢复存档！');
+        alert('已成功读取并恢复存档！');
         if (elMenuModal) elMenuModal.style.display = 'none';
       } catch (err) {
         alert('读取存档失败：' + err.message);
@@ -1162,13 +1163,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderDebugConsole() {
     // 1. 月份选择下拉
     if (elDbgMonthSelect) {
-      elDbgMonthSelect.innerHTML = window.MONTH_TIMELINE.map(t => `<option value="${t.total}" ${t.total === engine.state.total_month ? 'selected' : ''}>第 ${t.total} 月 · ${t.name}</option>`).join('');
+      setHTML(elDbgMonthSelect, window.MONTH_TIMELINE.map(t => `<option value="${t.total}" ${t.total === engine.state.total_month ? 'selected' : ''}>第 ${t.total} 月 · ${t.name}</option>`).join(''));
     }
 
     // 2. 结局直接触发按钮
     if (elDbgEndingBtns) {
       const endings = ['E01', 'E02', 'E03', 'E04', 'E05', 'E06', 'E07', 'E08', 'E09', 'E10', 'E11', 'E12', 'E13', 'E14', 'E15'];
-      elDbgEndingBtns.innerHTML = endings.map(id => `<button class="btn-ending-test" data-eid="${id}">${id} 测试</button>`).join('');
+      setHTML(elDbgEndingBtns, endings.map(id => `<button class="btn-ending-test" data-eid="${id}">${id} 测试</button>`).join(''));
       elDbgEndingBtns.querySelectorAll('.btn-ending-test').forEach(btn => {
         btn.onclick = () => {
           const eid = btn.getAttribute('data-eid');
@@ -1184,7 +1185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. 原始 JSON 状态
     if (elDbgRawState) {
-      elDbgRawState.textContent = JSON.stringify(engine.state, null, 2);
+      elDbgRawState.textContent = formatDebugState(engine.state);
     }
   }
 
