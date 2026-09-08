@@ -2,386 +2,272 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#234c3e">
   <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>大学四年模拟器 - 沉浸式人生模拟系统</title>
+  <title>大学四年模拟器 · 把青春写成自己的故事</title>
   <meta name="description" content="大学四年模拟器 - 体验真实大学四年的成长、抉择与人生轨迹">
-  <!-- Static Asset Version: 20260827-02 -->
-  <link rel="stylesheet" href="css/style.css?v=20260827-02">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css?v=20260908-01">
 </head>
 <body>
-  <!-- 顶部极简状态栏 (Top Status Bar) -->
+  <!-- 本地矢量图标：离线打开时也能完整显示。 -->
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-campus" viewBox="0 0 24 24"><path d="m3 9 9-6 9 6M5 10v10h14V10M9 20v-6h6v6M3 21h18M10 8h4"/><path d="M12 3V1m0 0h4l-1 2h-3"/></symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M19 4c-7-1-14 2-14 9a5 5 0 0 0 9 3c3-3 4-7 5-12Z"/><path d="M4 21c1-5 5-9 10-12M8 14l-1-4m4 1 4 1"/></symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 15l4-5 4 2 4-7M17 5h3v3"/></symbol>
+    <symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16 8-2.5 5.5L8 16l2.5-5.5L16 8Z"/></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><path d="M4 3h13a2 2 0 0 1 2 2v16H6a3 3 0 0 1-3-3V5a2 2 0 0 1 1-2Zm0 14h15M8 7h7M8 10h5"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="m13 2-8 12h6l-1 8 9-13h-7l1-7Z"/></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="3"/><path d="M8 3v4m8-4v4M4 11h16M8 15h2m4 0h2M8 18h2"/></symbol>
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></symbol>
+    <symbol id="icon-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol>
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/></symbol>
+    <symbol id="icon-rotate" viewBox="0 0 24 24"><rect x="7" y="4" width="10" height="16" rx="2" transform="rotate(-30 12 12)"/><path d="M18 3h3v3M3 18v3h3M20 4l-2-2M4 20l2 2"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="icon-save" viewBox="0 0 24 24"><path d="M4 4h13l3 3v13H4V4Zm3 0v6h9V4M8 20v-6h8v6"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 7V4h7l2 3h9v13H3V7Zm0 3h18"/></symbol>
+    <symbol id="icon-restart" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></symbol>
+    <symbol id="icon-tools" viewBox="0 0 24 24"><path d="m8 5-5 7 5 7M16 5l5 7-5 7m-3-9-2 18"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main-content">跳到游戏内容</a>
+
   <header class="top-bar">
     <div class="top-bar-inner">
       <div class="top-bar-left">
         <div class="brand">
-          <span class="brand-icon">🎓</span>
-          <span class="brand-title">大学四年模拟器</span>
+          <span class="brand-icon"><svg class="ui-icon"><use href="#icon-campus"/></svg></span>
+          <div class="brand-copy">
+            <div><span class="brand-title">大学四年</span><span class="brand-edition">人生模拟器</span></div>
+            <span class="brand-subtitle">THE UNIVERSITY JOURNAL</span>
+          </div>
         </div>
       </div>
       <div class="top-bar-center">
         <div class="stage-badge" id="top-stage-badge">
-          <span class="stage-dot"></span>
-          <span id="top-stage-text">大一上 · 9月</span>
+          <svg class="ui-icon"><use href="#icon-calendar"/></svg>
+          <span id="top-stage-text" aria-live="polite">大一上 · 9月</span>
         </div>
       </div>
       <div class="top-bar-right">
         <div class="resource-group">
           <div class="res-item res-tu" id="res-tu-chip" title="自由时间：本月自主安排时间">
-            <span class="res-icon">⏳</span>
-            <span class="res-val" id="top-tu-val">【安排宽裕】</span>
+            <svg class="ui-icon res-icon"><use href="#icon-clock"/></svg>
+            <div><span class="res-label">自由时间</span><span class="res-val" id="top-tu-val">【安排宽裕】</span></div>
           </div>
           <div class="res-item res-ep" id="res-ep-chip" title="精力状态：当前身心精力充沛">
-            <span class="res-icon">⚡</span>
-            <span class="res-val" id="top-ep-val">【状态充沛】</span>
+            <svg class="ui-icon res-icon"><use href="#icon-bolt"/></svg>
+            <div><span class="res-label">身心精力</span><span class="res-val" id="top-ep-val">【状态充沛】</span></div>
           </div>
         </div>
-        <button class="btn-icon-menu" id="btn-open-menu" title="游戏设置与更多操作" aria-label="更多菜单">
-          <span>⋯</span>
+        <button class="btn-icon-menu" id="btn-open-menu" title="游戏菜单" aria-label="打开游戏菜单">
+          <svg class="ui-icon"><use href="#icon-menu"/></svg>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- 主容器 (4大一级页面由底栏切换) -->
-  <main class="app-main">
-    <!-- ================= 页面 1: 人生 (Life 主页面) ================= -->
-    <section class="tab-panel active" id="panel-life">
+  <main class="app-main" id="main-content" tabindex="0">
+    <aside class="orientation-tip" id="orientation-tip" aria-label="横屏体验提示">
+      <svg class="ui-icon"><use href="#icon-rotate"/></svg>
+      <div><strong>横过来，校园更开阔</strong><span>横屏可以同时查看剧情与行动。</span></div>
+      <button id="dismiss-orientation-tip" aria-label="收起横屏提示"><svg class="ui-icon"><use href="#icon-close"/></svg></button>
+    </aside>
+
+    <section class="tab-panel active" id="panel-life" aria-label="大学生活">
+      <div class="workspace-heading">
+        <div><span class="section-kicker">YOUR STORY, YOUR WAY</span><h1>我的大学生活<span class="heading-dot">.</span></h1></div>
+        <ol class="academic-progress" aria-label="大学四年进度">
+          <li class="year-step is-current" data-year="大一"><span class="year-dot">01</span><span>大一</span></li>
+          <li class="year-step" data-year="大二"><span class="year-dot">02</span><span>大二</span></li>
+          <li class="year-step" data-year="大三"><span class="year-dot">03</span><span>大三</span></li>
+          <li class="year-step" data-year="大四"><span class="year-dot">04</span><span>大四</span></li>
+        </ol>
+      </div>
+
       <div class="life-layout">
-        <!-- 左侧核心决策流：当前事件 / 月度结算 -->
         <div class="life-main-col">
-          <!-- 阶段 A: 当前事件决策卡 (Event Choice Phase) -->
           <div class="event-stage-view" id="event-stage-view">
-            <!-- 多个事件时的轻量切换胶囊 -->
-            <div class="event-switch-bar" id="event-switch-bar" style="display: none;">
-              <span class="switch-label">📋 本月机遇：</span>
-              <div class="switch-chips" id="event-switch-chips"></div>
-            </div>
-
-            <!-- 当前主事件卡 -->
-            <div class="current-event-card" id="current-event-card">
-              <div class="event-meta-row">
-                <span class="event-tag" id="cur-event-pkg-tag">学业课程</span>
-                <span class="event-month-tag" id="cur-event-month-tag">第 1 个月</span>
+            <div class="event-stage-shell">
+              <div class="event-switch-bar" id="event-switch-bar" style="display: none;">
+                <span class="switch-label"><svg class="ui-icon"><use href="#icon-book"/></svg>本月机遇</span>
+                <div class="switch-chips" id="event-switch-chips"></div>
               </div>
-              <h2 class="event-headline" id="cur-event-title">新起点：大学第一堂专业导论课</h2>
-              <div class="event-narrative-box" id="cur-event-scene">
-                <!-- 动态填充剧情叙事 -->
-              </div>
-              <div class="action-prompt-row">
-                <span class="prompt-icon">👉</span>
-                <span class="prompt-text">面对当下的大学情境，你打算如何分配精力并采取行动？</span>
-              </div>
-            </div>
 
-            <!-- 可选行动卡片列表 -->
-            <div class="action-cards-grid" id="action-cards-grid">
-              <!-- 动态填充 3~4 个 Action Card -->
-            </div>
+              <div class="event-workspace">
+                <article class="current-event-card" id="current-event-card" aria-labelledby="cur-event-title" tabindex="0">
+                  <figure class="campus-illustration" aria-label="绿树环绕的大学校园插画">
+                    <span class="illustration-label">A LITTLE CAMPUS, A BIG WORLD</span>
+                    <img src="assets/campus-scene.svg" alt="暖阳下的大学钟楼、教学楼和林荫步道" width="640" height="380">
+                    <figcaption><span class="scene-dot"></span>在校园里，遇见更多可能</figcaption>
+                  </figure>
+                  <div class="event-copy">
+                    <div class="event-meta-row">
+                      <span class="event-tag" id="cur-event-pkg-tag">学业课程</span>
+                      <span class="event-month-tag" id="cur-event-month-tag">第 1 个月</span>
+                    </div>
+                    <h2 class="event-headline" id="cur-event-title">属于你的大学故事，即将开始</h2>
+                    <div class="event-narrative-box" id="cur-event-scene"></div>
+                    <div class="action-prompt-row">
+                      <svg class="ui-icon prompt-icon"><use href="#icon-spark"/></svg>
+                      <span class="prompt-text">每一个小小的选择，都在塑造未来的你。</span>
+                    </div>
+                    <div class="story-footnote" aria-hidden="true"><span></span>故事，正在发生<span></span></div>
+                  </div>
+                </article>
 
-            <!-- 系统通用行动：休息调整 -->
-            <div class="system-rest-section" id="system-rest-section">
-              <!-- 动态填充 🌿 休息调整卡片 -->
+                <div class="decision-column" tabindex="0" aria-label="可选行动，向下滚动查看全部选项">
+                  <div class="decision-heading">
+                    <div><span class="section-kicker">THE NEXT LITTLE STEP</span><h3>这一刻，你会怎么选？</h3></div>
+                    <svg class="ui-icon"><use href="#icon-compass"/></svg>
+                  </div>
+                  <div class="action-cards-grid" id="action-cards-grid"></div>
+                  <div class="system-rest-section" id="system-rest-section"></div>
+                  <p class="decision-footnote">不必每次都全力以赴，留白也是一种选择。</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- 阶段 B: 本次行动反馈卡 (Action Result Phase) -->
           <div class="month-result-view" id="month-result-view" style="display: none;">
             <div class="result-card">
               <div class="result-header">
-                <div class="result-badge">🌟 本次行动反馈</div>
-                <h2 class="result-title" id="result-title">本次选择带来了新的变化</h2>
+                <div class="result-emblem" aria-hidden="true"><svg class="ui-icon"><use href="#icon-leaf"/></svg></div>
+                <div class="result-badge">又写下了青春的一页</div>
+                <h2 class="result-title" id="result-title" tabindex="-1">本次选择带来了新的变化</h2>
                 <div class="result-subtitle" id="result-subtitle">大学生活的脚步正在稳步向前</div>
               </div>
-
-              <!-- 叙事反馈 -->
-              <div class="result-story-box">
-                <div class="story-label">📖 经历反馈：</div>
-                <div class="story-text" id="result-story-text">
-                  <!-- 动态填入 choice.result_text -->
-                </div>
+              <div class="result-story-box" tabindex="0" aria-label="本次行动经历">
+                <div class="story-label">这一次的经历</div>
+                <div class="story-text" id="result-story-text" aria-live="polite"></div>
               </div>
-
-              <!-- 本次行动定性变化与收获 -->
-              <div class="result-changes-box">
-                <div class="changes-label">📈 成长与影响：</div>
-                <div class="changes-tags-list" id="result-changes-list">
-                  <!-- 动态填入翻译为人类语言的成长与损耗 -->
-                </div>
+              <div class="result-changes-box" tabindex="0" aria-label="本次行动的成长与影响">
+                <div class="changes-label">留下的成长与回响</div>
+                <div class="changes-tags-list" id="result-changes-list"></div>
               </div>
-
-              <!-- 推进操作按钮区 (动态渲染: 继续安排本月 / 结束本月) -->
               <div class="result-footer" id="result-footer-actions">
                 <div class="result-actions-row">
-                  <button class="btn-primary-advance" id="btn-result-continue-month">
-                    <span>👉 继续安排本月</span>
-                  </button>
-                  <button class="btn-secondary-advance" id="btn-result-next-month">
-                    <span id="btn-next-month-text">结束本月，进入下个月</span>
-                    <span class="btn-arrow">&rarr;</span>
-                  </button>
+                  <button class="btn-primary-advance" id="btn-result-continue-month"><span>继续安排本月</span></button>
+                  <button class="btn-secondary-advance" id="btn-result-next-month"><span id="btn-next-month-text">结束本月，进入下个月</span><span class="btn-arrow">&rarr;</span></button>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 右侧极简速览栏 (Quick Status Sidebar) -->
-        <aside class="life-sidebar-col">
-          <!-- 极简生活状态 -->
-          <div class="quick-card">
-            <div class="quick-card-head">
-              <span class="head-title">❤️ 我的状态</span>
-              <span class="head-sub">综合评级</span>
-            </div>
-            <div class="quick-status-list" id="quick-status-list">
-              <!-- 动态填入 5 个核心生活状态 (学业, 健康, 心态, 社交, 家庭) -->
-            </div>
+        <aside class="life-sidebar-col" aria-label="生活状态速览" tabindex="0">
+          <div class="sidebar-intro"><span class="sidebar-rule"></span><span>好好生活，慢慢成长</span></div>
+          <div class="quick-card status-card">
+            <div class="quick-card-head"><span class="head-title"><svg class="ui-icon"><use href="#icon-leaf"/></svg>我的状态</span><span class="head-sub">此时此刻</span></div>
+            <div class="quick-status-list" id="quick-status-list"></div>
           </div>
-
-          <!-- 最近成长简讯 -->
-          <div class="quick-card">
-            <div class="quick-card-head">
-              <span class="head-title">🌱 最近成长</span>
-              <span class="head-sub">最新变化</span>
-            </div>
-            <div class="recent-growth-list" id="recent-growth-list">
-              <!-- 动态填入最新 2~3 项正向能力沉淀 -->
-            </div>
+          <div class="quick-card growth-note-card">
+            <div class="quick-card-head"><span class="head-title"><svg class="ui-icon"><use href="#icon-spark"/></svg>最近成长</span><span class="head-sub">一点一滴</span></div>
+            <div class="recent-growth-list" id="recent-growth-list"></div>
+            <div class="growth-note-decoration" aria-hidden="true">a little better, every day.</div>
           </div>
-
-          <!-- 前往完整档案快捷入口 -->
-          <button class="btn-link-growth" id="link-to-growth-btn">
-            <span>查看完整档案与能力雷达</span>
-            <span class="link-arrow">&rarr;</span>
-          </button>
+          <button class="btn-link-growth" id="link-to-growth-btn"><span>翻开我的成长档案</span><svg class="ui-icon"><use href="#icon-arrow"/></svg></button>
+          <div class="campus-note"><span class="note-quote" aria-hidden="true">“</span><p>四年很长，<br>足够找到自己的模样。</p><span class="note-signature">写给每一个，正在出发的你</span><svg class="ui-icon"><use href="#icon-leaf"/></svg></div>
         </aside>
       </div>
     </section>
 
-    <!-- ================= 页面 2: 成长 (Growth 完整状态与能力) ================= -->
-    <section class="tab-panel" id="panel-growth">
-      <div class="panel-inner-container">
-        <div class="panel-header">
-          <h2 class="panel-title">📊 个人成长档案</h2>
-          <p class="panel-desc">记录你在大学四年中的生活状态平衡与七大核心能力资产沉淀</p>
+    <section class="tab-panel" id="panel-growth" aria-label="个人成长档案">
+      <div class="panel-inner-container" tabindex="0" aria-label="成长档案内容">
+        <div class="panel-header"><span class="section-kicker">GROW AT YOUR OWN PACE</span><h2 class="panel-title">成长，自有轨迹<span class="heading-dot">.</span></h2><p class="panel-desc">记录生活的平衡，也看见一点一滴积累起来的能力。</p></div>
+        <div class="growth-section-card basic-states-section">
+          <div class="card-section-title"><span><svg class="ui-icon"><use href="#icon-leaf"/></svg>基础生活状态</span><span class="section-index">01 / LIFE & BALANCE</span></div>
+          <div class="states-grid" id="growth-basic-states-grid"></div>
         </div>
-
-        <!-- 第一层：五大基础生活状态 -->
-        <div class="growth-section-card">
-          <div class="card-section-title">
-            <span>❤️ 基础生活状态 (Life States)</span>
-          </div>
-          <div class="states-grid" id="growth-basic-states-grid">
-            <!-- 动态渲染学业、健康、心态、社交、家庭 -->
-          </div>
-        </div>
-
-        <!-- 第二层：七大能力沉淀资产与雷达图 -->
-        <div class="growth-section-card">
-          <div class="card-section-title">
-            <span>⚡ 七大核心能力资产 (Core Assets)</span>
-          </div>
-          <div class="growth-radar-wrapper" id="growth-radar-wrapper">
-            <!-- 动态渲染七边形 SVG 能力雷达图 -->
-          </div>
-          <div class="capabilities-grid" id="growth-cap-grid">
-            <!-- 动态渲染作品集, 科研, 硬技能, 交付力, 口碑, 专注, AI深度 -->
-          </div>
+        <div class="growth-section-card core-assets-section">
+          <div class="card-section-title"><span><svg class="ui-icon"><use href="#icon-chart"/></svg>七大核心能力</span><span class="section-index">02 / LITTLE BY LITTLE</span></div>
+          <div class="growth-assets-layout"><div class="growth-radar-wrapper" id="growth-radar-wrapper"></div><div class="capabilities-grid" id="growth-cap-grid"></div></div>
         </div>
       </div>
     </section>
 
-    <!-- ================= 页面 3: 路线 (Routes 发展规划与路径) ================= -->
-    <section class="tab-panel" id="panel-routes">
+    <section class="tab-panel" id="panel-routes" aria-label="毕业发展路线">
       <div class="panel-inner-container">
-        <div class="panel-header">
-          <h2 class="panel-title">🚩 毕业发展路径规划</h2>
-          <p class="panel-desc">探索并推进校招就业、名校推免、考研统考与极客创业等多元方向</p>
-        </div>
-
-        <!-- 路线卡片容器 (渐进式展开) -->
-        <div class="routes-container" id="routes-cards-container">
-          <!-- 动态渲染 4 大发展路线与展开详情 -->
-        </div>
+        <div class="panel-header"><span class="section-kicker">MORE THAN ONE WAY FORWARD</span><h2 class="panel-title">未来，不止一个方向<span class="heading-dot">.</span></h2><p class="panel-desc">就业、升学，或一段意想不到的旅程。你的经历，让可能慢慢清晰。</p></div>
+        <div class="routes-container" id="routes-cards-container"></div>
       </div>
     </section>
 
-    <!-- ================= 页面 4: 履历 (History 人生经历与成果) ================= -->
-    <section class="tab-panel" id="panel-history">
+    <section class="tab-panel" id="panel-history" aria-label="大学人生履历">
       <div class="panel-inner-container">
-        <div class="panel-header">
-          <h2 class="panel-title">📜 大学人生履历与里程碑</h2>
-          <p class="panel-desc">沉淀四年里的每一次关键抉择、里程碑成就、项目科研与毕业成果</p>
+        <div class="panel-header"><span class="section-kicker">THE DAYS THAT MADE YOU</span><h2 class="panel-title">每一页，都算数<span class="heading-dot">.</span></h2><p class="panel-desc">把走过的路、做过的选择，收藏成只属于你的大学四年。</p></div>
+        <div class="history-subtabs" aria-label="履历分类">
+          <button class="subtab-btn active" data-subtab="timeline">人生大事记</button>
+          <button class="subtab-btn" data-subtab="milestones">关键里程碑</button>
+          <button class="subtab-btn" data-subtab="projects">STAR 项目库</button>
+          <button class="subtab-btn" data-subtab="resume-view">毕业成果与简历</button>
         </div>
-
-        <!-- 履历子导航 -->
-        <div class="history-subtabs">
-          <button class="subtab-btn active" data-subtab="timeline">⏱️ 人生大事记</button>
-          <button class="subtab-btn" data-subtab="milestones">🏆 关键里程碑</button>
-          <button class="subtab-btn" data-subtab="projects">💻 STAR 项目库</button>
-          <button class="subtab-btn" data-subtab="resume-view">🎓 毕业成果与简历</button>
-        </div>
-
-        <!-- 子页面 1: 人生大事记时间轴 -->
-        <div class="history-subpanel active" id="subpanel-timeline">
-          <div class="timeline-container" id="history-timeline-list">
-            <!-- 动态渲染按学期分组的时间轴 -->
-          </div>
-        </div>
-
-        <!-- 子页面 2: 关键里程碑 -->
-        <div class="history-subpanel" id="subpanel-milestones" style="display: none;">
-          <div class="milestones-grid" id="history-milestones-grid">
-            <!-- 动态渲染人生经历/里程碑成就徽章 -->
-          </div>
-        </div>
-
-        <!-- 子页面 3: STAR 项目经历库 -->
-        <div class="history-subpanel" id="subpanel-projects" style="display: none;">
-          <div class="projects-list" id="history-projects-list">
-            <!-- 动态渲染积累的 STAR 项目与科研经历 -->
-          </div>
-        </div>
-
-        <!-- 子页面 4: 毕业成果预览 / 正式简历 -->
-        <div class="history-subpanel" id="subpanel-resume-view" style="display: none;">
-          <div class="resume-preview-container" id="history-resume-preview">
-            <!-- 动态渲染：未毕业显示成型中提示，毕业后展示双视图 -->
-          </div>
-        </div>
+        <div class="history-subpanel active" id="subpanel-timeline"><div class="timeline-container" id="history-timeline-list"></div></div>
+        <div class="history-subpanel" id="subpanel-milestones" style="display: none;"><div class="milestones-grid" id="history-milestones-grid"></div></div>
+        <div class="history-subpanel" id="subpanel-projects" style="display: none;"><div class="projects-list" id="history-projects-list"></div></div>
+        <div class="history-subpanel" id="subpanel-resume-view" style="display: none;"><div class="resume-preview-container" id="history-resume-preview"></div></div>
       </div>
     </section>
   </main>
 
-  <!-- 底部固定一级导航栏 (Bottom Navigation) -->
-  <nav class="bottom-nav">
+  <!-- 横屏与桌面使用左侧导航；竖屏回落为底部导航。原有切页入口保持不变。 -->
+  <nav class="bottom-nav" aria-label="主导航">
+    <div class="rail-emblem" aria-hidden="true"><svg class="ui-icon"><use href="#icon-campus"/></svg><span>UNIV.</span></div>
     <div class="bottom-nav-inner">
-      <button class="nav-item active" data-tab="life" id="nav-btn-life">
-        <span class="nav-icon">🌿</span>
-        <span class="nav-text">人生</span>
-      </button>
-      <button class="nav-item" data-tab="growth" id="nav-btn-growth">
-        <span class="nav-icon">📊</span>
-        <span class="nav-text">成长</span>
-      </button>
-      <button class="nav-item" data-tab="routes" id="nav-btn-routes">
-        <span class="nav-icon">🚩</span>
-        <span class="nav-text">路线</span>
-      </button>
-      <button class="nav-item" data-tab="history" id="nav-btn-history">
-        <span class="nav-icon">📜</span>
-        <span class="nav-text">履历</span>
-      </button>
+      <button class="nav-item active" data-tab="life" id="nav-btn-life" aria-current="page"><span class="nav-icon"><svg class="ui-icon"><use href="#icon-leaf"/></svg></span><span class="nav-text">人生</span></button>
+      <button class="nav-item" data-tab="growth" id="nav-btn-growth"><span class="nav-icon"><svg class="ui-icon"><use href="#icon-chart"/></svg></span><span class="nav-text">成长</span></button>
+      <button class="nav-item" data-tab="routes" id="nav-btn-routes"><span class="nav-icon"><svg class="ui-icon"><use href="#icon-compass"/></svg></span><span class="nav-text">路线</span></button>
+      <button class="nav-item" data-tab="history" id="nav-btn-history"><span class="nav-icon"><svg class="ui-icon"><use href="#icon-book"/></svg></span><span class="nav-text">履历</span></button>
     </div>
+    <div class="rail-footer" aria-hidden="true"><span>慢慢生长</span><svg class="ui-icon"><use href="#icon-spark"/></svg></div>
   </nav>
 
-  <!-- ================= 弹窗系统 ================= -->
-
-  <!-- 1. 游戏主菜单弹窗 (Settings / Menu Modal) -->
-  <div class="modal-overlay" id="menu-modal" style="display: none;">
+  <div class="modal-overlay" id="menu-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="menu-title">
     <div class="modal-card menu-modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title">⚙️ 游戏菜单与设置</h3>
-        <button class="btn-close" id="btn-close-menu">&times;</button>
-      </div>
+      <div class="modal-header"><div><span class="section-kicker">TAKE A LITTLE PAUSE</span><h3 class="modal-title" id="menu-title">校园生活，稍作停留</h3></div><button class="btn-close" id="btn-close-menu" aria-label="关闭游戏菜单">&times;</button></div>
       <div class="menu-list">
-        <button class="menu-item" id="menu-btn-save">
-          <div class="menu-item-icon">💾</div>
-          <div class="menu-item-info">
-            <div class="menu-item-title">保存游戏进度</div>
-            <div class="menu-item-desc">将当前大学人生存档保存在本地浏览器</div>
-          </div>
-        </button>
-        <button class="menu-item" id="menu-btn-load">
-          <div class="menu-item-icon">📂</div>
-          <div class="menu-item-info">
-            <div class="menu-item-title">读取已有存档</div>
-            <div class="menu-item-desc">恢复最近一次保存的游戏进度</div>
-          </div>
-        </button>
-        <button class="menu-item" id="menu-btn-restart">
-          <div class="menu-item-icon">🔄</div>
-          <div class="menu-item-info">
-            <div class="menu-item-title">重新开始人生</div>
-            <div class="menu-item-desc">重置为大一 9 月新生初始状态</div>
-          </div>
-        </button>
-        <button class="menu-item" id="menu-btn-open-debug">
-          <div class="menu-item-icon">🛠️</div>
-          <div class="menu-item-info">
-            <div class="menu-item-title">开发者调试与演练工具</div>
-            <div class="menu-item-desc">快速预设演练、属性调整、月份跳转与结局测试</div>
-          </div>
-        </button>
+        <button class="menu-item" id="menu-btn-save"><span class="menu-item-icon"><svg class="ui-icon"><use href="#icon-save"/></svg></span><span class="menu-item-info"><span class="menu-item-title">保存游戏进度</span><span class="menu-item-desc">把这一页留在本地浏览器，下次接着写</span></span><span class="menu-item-arrow">↗</span></button>
+        <button class="menu-item" id="menu-btn-load"><span class="menu-item-icon"><svg class="ui-icon"><use href="#icon-folder"/></svg></span><span class="menu-item-info"><span class="menu-item-title">读取已有存档</span><span class="menu-item-desc">回到最近一次保存的校园时光</span></span><span class="menu-item-arrow">↗</span></button>
+        <button class="menu-item" id="menu-btn-restart"><span class="menu-item-icon"><svg class="ui-icon"><use href="#icon-restart"/></svg></span><span class="menu-item-info"><span class="menu-item-title">重新开始人生</span><span class="menu-item-desc">重新出发，回到大一九月</span></span><span class="menu-item-arrow">↗</span></button>
+        <button class="menu-item menu-item-debug" id="menu-btn-open-debug"><span class="menu-item-icon"><svg class="ui-icon"><use href="#icon-tools"/></svg></span><span class="menu-item-info"><span class="menu-item-title">开发者调试与演练工具</span><span class="menu-item-desc">路线预设、月份跳转与结局测试</span></span><span class="menu-item-arrow">↗</span></button>
       </div>
     </div>
   </div>
 
-  <!-- 2. 开发者调试与演练工具弹窗 (Debug Console Modal - 隐藏在菜单与URL中) -->
-  <div class="modal-overlay" id="debug-modal" style="display: none;">
+  <div class="modal-overlay" id="debug-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="debug-title">
     <div class="modal-card debug-modal-card">
-      <div class="modal-header">
-        <h3 class="modal-title">🛠️ 开发者与测试演练控制台 (Debug Console)</h3>
-        <button class="btn-close" id="btn-close-debug">&times;</button>
-      </div>
+      <div class="modal-header"><h3 class="modal-title" id="debug-title">开发者与测试演练控制台</h3><button class="btn-close" id="btn-close-debug" aria-label="关闭调试控制台">&times;</button></div>
       <div class="debug-modal-body">
-        <div class="debug-block">
-          <div class="debug-block-title">⚡ 核心路线一键演练预设 (Playtest Presets)</div>
-          <div class="debug-presets-grid">
-            <button class="btn-debug-preset" id="dbg-route-a">Route A: 极客工程实战 + 顶级大厂 SSP (E04)</button>
-            <button class="btn-debug-preset" id="dbg-route-b">Route B: 顶尖名校学术保研推免 (E01)</button>
-            <button class="btn-debug-preset" id="dbg-route-c">Route C: 统考高分金榜题名 (E03)</button>
-            <button class="btn-debug-preset" id="dbg-route-d">Route D: 稳健发展·优质名企骨干 (E06)</button>
-            <button class="btn-debug-preset" id="dbg-route-e">Route E: 极客创业·具身智能核心力量 (E05)</button>
-          </div>
-        </div>
-
-        <div class="debug-block">
-          <div class="debug-block-title">⏱️ 月份快速跳转</div>
-          <div class="debug-jump-row">
-            <select class="debug-select" id="dbg-month-select"></select>
-            <button class="btn-debug-action" id="dbg-btn-jump-month">跳转至指定月份</button>
-          </div>
-        </div>
-
-        <div class="debug-block">
-          <div class="debug-block-title">🏆 结局直接测试</div>
-          <div class="debug-ending-btns" id="dbg-ending-btns">
-            <!-- 动态生成 E01~E15 快捷测试按钮 -->
-          </div>
-        </div>
-
-        <div class="debug-block">
-          <div class="debug-block-title">🔍 原始状态查看 (Raw State Inspector)</div>
-          <pre class="debug-json-view" id="dbg-raw-state"></pre>
-        </div>
+        <div class="debug-block"><div class="debug-block-title">核心路线一键演练预设</div><div class="debug-presets-grid">
+          <button class="btn-debug-preset" id="dbg-route-a">Route A: 极客工程实战 + 顶级大厂 SSP (E04)</button>
+          <button class="btn-debug-preset" id="dbg-route-b">Route B: 顶尖名校学术保研推免 (E01)</button>
+          <button class="btn-debug-preset" id="dbg-route-c">Route C: 统考高分金榜题名 (E03)</button>
+          <button class="btn-debug-preset" id="dbg-route-d">Route D: 稳健发展·优质名企骨干 (E06)</button>
+          <button class="btn-debug-preset" id="dbg-route-e">Route E: 极客创业·具身智能核心力量 (E05)</button>
+        </div></div>
+        <div class="debug-block"><label class="debug-block-title" for="dbg-month-select">月份快速跳转</label><div class="debug-jump-row"><select class="debug-select" id="dbg-month-select"></select><button class="btn-debug-action" id="dbg-btn-jump-month">跳转至指定月份</button></div></div>
+        <div class="debug-block"><div class="debug-block-title">结局直接测试</div><div class="debug-ending-btns" id="dbg-ending-btns"></div></div>
+        <div class="debug-block"><div class="debug-block-title">原始状态查看</div><pre class="debug-json-view" id="dbg-raw-state" tabindex="0" aria-label="原始游戏状态"></pre></div>
       </div>
     </div>
   </div>
 
-  <!-- 3. 毕业大结局与简历全屏弹窗 (Graduation & Resume Modal) -->
-  <div class="modal-overlay" id="resume-modal-overlay" style="display: none;">
+  <div class="modal-overlay" id="resume-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-label="毕业成果与简历">
     <div class="modal-card resume-modal-card">
-      <div class="resume-modal-top">
-        <div class="resume-nav-tabs">
-          <button class="resume-tab-btn active" id="tab-btn-certificate">🎓 毕业去向荣誉证书</button>
-          <button class="resume-tab-btn" id="tab-btn-resume">📄 大赛级标准毕业简历</button>
-        </div>
-        <button class="btn-close-modal" id="btn-close-resume">&times;</button>
-      </div>
-      <div class="resume-modal-body" id="resume-modal-body">
-        <!-- 动态渲染最终毕业简历与结局证书 -->
-      </div>
+      <div class="resume-modal-top"><div class="resume-nav-tabs"><button class="resume-tab-btn active" id="tab-btn-certificate">毕业去向荣誉证书</button><button class="resume-tab-btn" id="tab-btn-resume">标准毕业简历</button></div><button class="btn-close-modal" id="btn-close-resume" aria-label="关闭毕业成果">&times;</button></div>
+      <div class="resume-modal-body" id="resume-modal-body" tabindex="0" aria-label="毕业成果全文"></div>
     </div>
   </div>
 
-  <!-- 脚本载入 (统一静态资源版本: 20260827-02) -->
+  <!-- 游戏脚本及数据保持原版；presentation.js 只增强视觉状态和键盘操作。 -->
   <script src="js/state.js?v=20260827-02"></script>
   <script src="js/engine.js?v=20260827-02"></script>
   <script src="js/events_embed.js?v=20260827-02"></script>
   <script src="js/app.js?v=20260827-02"></script>
+  <script src="js/presentation.js?v=20260908-01"></script>
 </body>
 </html>
